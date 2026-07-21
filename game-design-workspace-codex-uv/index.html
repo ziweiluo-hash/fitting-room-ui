@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>游戏设计工作台 / Game Design Workspace</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="board-app">
+    <header id="module-workspace" class="board-title board-note">
+        <p class="eyebrow">WORKSPACE</p>
+        <div class="workspace-brand">
+          <h1 class="workspace-title-cn">游戏设计工作台</h1>
+          <p class="workspace-title-en" lang="en">Game Design Workspace</p>
+          <p class="workspace-intro">从玩法大纲生成完整策划案、交互设计方案、可编辑 SVG、总资产和界面视觉设计稿，支持参考图与设计资源打包导出。</p>
+          <a class="module-download-button workspace-export-button" href="/ui-chaitu.html">UI 拆图工具</a>
+        </div>
+        <div class="workspace-actions">
+          <button id="exportAllResources" class="module-download-button workspace-export-button" type="button">下载项目资源包</button>
+          <p id="exportAllResourcesStatus" class="workspace-export-status" aria-live="polite">导出策划案、交互方案、可编辑 SVG、参考图、总资产和界面设计稿。</p>
+          <button id="autoGenerateWorkflow" class="module-download-button workspace-export-button auto-generate-button" type="button">自动生成</button>
+        </div>
+    </header>
+    <div class="status-sink" hidden>
+      <span id="briefStatus">等待输入策划案</span>
+      <span id="planStatus">方案待生成</span>
+      <span id="designStatus">设计稿待生成</span>
+    </div>
+
+    <aside class="quick-tabs board-note" aria-label="模块快速切换">
+      <p class="eyebrow">WORKFLOW</p>
+      <h2>生成流程</h2>
+      <div class="quick-tab-list">
+        <button class="step is-active" type="button" data-focus="module-brief">玩法大纲</button>
+        <button class="step" type="button" data-focus="module-game-design">策划案</button>
+        <button class="step" type="button" data-focus="module-plan">交互案</button>
+        <button class="step" type="button" data-focus="module-visual">可编辑 SVG</button>
+        <button class="step" type="button" data-focus="module-design">视觉设计稿</button>
+      </div>
+    </aside>
+
+    <section id="module-brief" class="brief-note board-note">
+      <section class="rail-card">
+        <div class="brief-card-heading">
+          <div>
+            <p class="eyebrow">BRIEF</p>
+            <h2>玩法大纲</h2>
+          </div>
+          <button id="lockBriefDoc" class="module-download-button" type="button" data-lock-doc="brief">锁定</button>
+          <label class="upload-tile mini-upload" for="briefFile">
+            <input id="briefFile" type="file" accept=".txt,.md,.json,.csv,.pdf,.docx" hidden>
+            <strong>+ 上传</strong>
+            <span>txt / md / pdf / docx</span>
+          </label>
+        </div>
+        <label class="field">
+          <span>项目名称</span>
+          <input id="gameName" type="text" placeholder="输入项目名称，可从策划案自动识别">
+        </label>
+        <label class="field brief-text-field">
+          <span>玩法大纲内容</span>
+          <textarea id="briefText" rows="9" placeholder="粘贴几段玩法大纲：游戏名字、游戏介绍、玩法设计、玩家留存方式、后续拓展"></textarea>
+        </label>
+        <label class="field brief-platform-field">
+          <span>目标平台</span>
+          <select id="platform">
+            <option value="landscape" selected>界面：横版（16:9）</option>
+            <option value="portrait">界面：竖版（9:16）</option>
+          </select>
+        </label>
+        <section class="normalized-outline-panel brief-normalized-outline-panel">
+          <div class="normalized-outline-layout">
+            <div class="normalized-outline-sidebar">
+              <div class="normalized-outline-heading">
+                <div>
+                  <p class="eyebrow">NORMALIZED OUTLINE</p>
+                  <h3>规范化玩法大纲</h3>
+                </div>
+              </div>
+              <div class="doc-control-panel normalized-outline-control-panel">
+                <div class="doc-control-grid normalized-outline-control-grid">
+                  <label class="field text-model-field">
+                    <span>规范化模型</span>
+                    <select id="normalizeOutlineModel">
+                      <option value="kimi-k2-thinking" selected>Kimi K2</option>
+                      <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                      <option value="gpt-5.2">GPT 5.2</option>
+                      <option value="gpt-5.4">GPT 5.4</option>
+                      <option value="glm-5">GLM-5</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+              <p id="normalizedOutlineStatus" class="normalized-outline-status">请先输入玩法大纲，再点击「规范化玩法大纲」。</p>
+            </div>
+            <div class="normalized-outline-body is-hidden">
+              <textarea id="normalizedOutlineOutput" class="normalized-outline-output is-hidden" rows="8" aria-hidden="true" tabindex="-1"></textarea>
+              <div id="normalizedOutlineTable" class="normalized-outline-table-wrap" aria-live="polite"></div>
+            </div>
+            <div class="normalized-outline-action">
+              <button id="normalizeOutline" class="rail-action primary doc-generate-button" type="button">规范化玩法大纲</button>
+            </div>
+          </div>
+        </section>
+      </section>
+    </section>
+
+    <section class="board-area">
+      <div class="canvas">
+        <article id="module-game-design" class="board-note game-design-note">
+          <div class="note-heading">
+            <div>
+              <p class="eyebrow">GAME DESIGN DOC</p>
+              <h2>完整策划案</h2>
+            </div>
+            <button id="lockGameDesignDoc" class="module-download-button" type="button" data-lock-doc="gameDesign">锁定</button>
+            <button id="exportGameDesignPdf" class="module-download-button" type="button">下载 PDF</button>
+          </div>
+          <div class="doc-control-panel">
+            <div class="doc-control-grid game-design-control-grid">
+              <label class="field text-model-field">
+                <span>策划案模型</span>
+                <select id="gameDesignModel">
+                  <option value="kimi-k2-thinking" selected>Kimi K2</option>
+                  <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                  <option value="gpt-5.2">GPT 5.2</option>
+                  <option value="gpt-5.4">GPT 5.4</option>
+                  <option value="glm-5">GLM-5</option>
+                </select>
+              </label>
+              <button id="generateGameDesign" class="rail-action primary doc-generate-button" type="button">生成策划案</button>
+            </div>
+          </div>
+          <div id="gameDesignPreview" class="rich-document empty-document"></div>
+          <textarea id="gameDesignOutput" class="plan-output markdown-source is-hidden" rows="16" placeholder="点击生成策划案后，这里会显示专业且详细的游戏策划案。生成后可继续手动编辑，再生成交互设计案。"></textarea>
+          <section class="rail-card screen-card is-hidden">
+            <div class="screen-card-heading">
+              <div>
+                <p class="eyebrow">SCREENS</p>
+                <h2>目标界面</h2>
+              </div>
+              <button id="refreshTargetScreens" class="inline-refresh" type="button">刷新界面</button>
+            </div>
+            <div class="screen-picker" aria-label="目标界面">
+              <p class="screen-empty">完整策划案生成后自动识别目标界面</p>
+            </div>
+          </section>
+        </article>
+
+        <article id="module-plan" class="board-note plan-note">
+          <div class="note-heading">
+            <div>
+              <p class="eyebrow">DOCUMENT</p>
+              <h2>交互设计方案</h2>
+            </div>
+            <div class="document-tools">
+              <div class="plan-tabs" role="tablist" aria-label="交互方案内容">
+                <button class="is-active" type="button" data-plan-tab="overview">完整</button>
+                <button type="button" data-plan-tab="screens">界面</button>
+                <button type="button" data-plan-tab="flows">流程</button>
+                <button type="button" data-plan-tab="handoff">交付</button>
+              </div>
+              <button id="refreshVisualInline" class="inline-refresh" type="button">刷新可视化</button>
+              <button id="lockPlanDoc" class="module-download-button" type="button" data-lock-doc="plan">锁定</button>
+              <button id="exportPlanPdf" class="module-download-button" type="button">下载 PDF</button>
+            </div>
+          </div>
+          <div class="doc-control-panel">
+            <div class="doc-control-grid interaction-control-grid">
+              <label class="field text-model-field">
+                <span>交互案模型</span>
+                <select id="interactionModel">
+                  <option value="kimi-k2-thinking" selected>Kimi K2</option>
+                  <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                  <option value="gpt-5.2">GPT 5.2</option>
+                  <option value="gpt-5.4">GPT 5.4</option>
+                  <option value="glm-5">GLM-5</option>
+                </select>
+              </label>
+              <button id="generatePlan" class="rail-action primary doc-generate-button" type="button">生成交互案</button>
+              <p class="helper-text">基于左侧目标平台和已编辑的完整策划案生成。</p>
+            </div>
+          </div>
+          <div id="planPreview" class="rich-document empty-document"></div>
+          <textarea id="planOutput" class="plan-output markdown-source is-hidden" rows="18" placeholder="完整策划案生成后，这里会继续生成专业交互设计方案。你也可以手动编辑后刷新可视化。"></textarea>
+        </article>
+
+        <article id="module-visual" class="board-note visual-note">
+          <div class="note-heading">
+            <div>
+              <p class="eyebrow">VISUAL SVG</p>
+              <h2>可视化交互方案</h2>
+            </div>
+            <div class="visual-heading-actions">
+              <div id="visualTabs" class="visual-tabs" aria-label="可视化界面切换"></div>
+              <button id="lockVisualSvg" class="module-download-button" type="button">锁定</button>
+              <button id="exportSvg" class="module-download-button visual-export-action" type="button">导出 SVG</button>
+            </div>
+          </div>
+          <div class="doc-control-panel visual-control-panel">
+            <div class="doc-control-grid interaction-visual-control-grid">
+              <label class="field visual-requirements-field">
+                <span>当前 SVG 要求</span>
+                <textarea id="visualRequirements" rows="2" placeholder="例如：重点展示宠物状态、喂养按钮和亲密度进度；不要展示商店入口。"></textarea>
+              </label>
+              <button id="generateAllInteractionVisuals" class="rail-action primary doc-generate-button" type="button">一键生成所有界面 SVG</button>
+              <button id="generateInteractionVisuals" class="rail-action primary doc-generate-button" type="button">生成可编辑交互 SVG</button>
+              <p class="helper-text">先调用上方交互案聊天模型分析完整策划案与交互案，再生成可导入 Figma 拆层编辑的 SVG 线框标注稿，不调用生图模型。</p>
+            </div>
+          </div>
+          <div id="visualCanvas" class="visual-canvas" aria-label="可视化交互设计方案"></div>
+        </article>
+
+        <article id="module-design" class="board-note design-note">
+          <div class="note-heading">
+            <div>
+              <p class="eyebrow">DESIGN DRAFT</p>
+              <h2>界面视觉设计稿</h2>
+            </div>
+            <div class="design-heading-actions">
+              <div id="designTabs" class="visual-tabs" aria-label="设计稿界面切换"></div>
+              <button id="lockTotalAssetKit" class="module-download-button" type="button">锁定总资产</button>
+              <button id="lockDesignDrafts" class="module-download-button" type="button">锁定设计稿</button>
+              <button id="exportAllDesignDrafts" class="module-download-button" type="button">下载设计稿</button>
+            </div>
+          </div>
+          <div class="design-control-panel style-prompt-panel">
+            <div class="style-prompt-grid">
+              <div class="style-generation-title">生成设计稿</div>
+              <section class="style-reference-panel">
+                <div class="style-panel-head">
+                  <div>
+                    <span>STYLE REFERENCE</span>
+                    <strong>画风参考图 <em class="field-note">最多支持 2 张</em></strong>
+                  </div>
+                  <label class="srp-upload-button" for="styleRefs">
+                    <input id="styleRefs" type="file" accept="image/*" multiple hidden>
+                    + 上传
+                  </label>
+                </div>
+                <div id="stylePreview" class="style-reference-preview is-empty" tabindex="0" aria-label="画风参考图预览，可粘贴或拖拽图片">
+                  <div class="style-preview-empty">
+                    <strong>等待参考图</strong>
+                    <span>最多 2 张。支持上传、拖拽、粘贴，点击图号可插入到提示词。</span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="style-prompt-editor-panel">
+                <div class="style-panel-head">
+                  <div>
+                    <span>PROMPT</span>
+                    <strong>生图关键词</strong>
+                  </div>
+                  <button id="resetStylePrompt" class="srp-reset-button" type="button">清空</button>
+                </div>
+                <div id="styleKeywords" class="style-prompt-editor" contenteditable="true" role="textbox" aria-multiline="true" data-placeholder="例如：参考图1的配色与材质，治愈系、马卡龙、手绘质感、干净直角 UI、正式游戏界面、16:9"></div>
+              </section>
+
+              <section class="style-generation-summary-panel">
+                <div class="style-panel-head">
+                  <div>
+                    <span>GENERATION INFO</span>
+                    <strong>生图信息汇总</strong>
+                  </div>
+                  <div class="style-analysis-actions">
+                    <button id="refreshStyleAnalysis" class="srp-reset-button style-analysis-refresh-button" type="button">刷新参考图分析</button>
+                  </div>
+                </div>
+                <div id="designPromptSummary" class="style-generation-summary"></div>
+              </section>
+
+              <div class="style-generation-controls">
+                <label class="field">
+                  <span>图像模型</span>
+                  <select id="designModel">
+                    <option value="gpt-image-2" selected>IMAGE 2</option>
+                    <option value="gemini-3.1-flash-image-preview">🍌 Banana 2.0 NEW</option>
+                    <option value="gemini-3-pro-image-preview">🍌 Banana Pro</option>
+                    <option value="gpt-image-1.5">GPT 1.5</option>
+                  </select>
+                </label>
+                <button id="generateAllDesigns" class="rail-action design-generate-all-button" type="button">一键生成所有设计稿</button>
+                <button id="generateDesigns" class="rail-action primary design-generate-button" type="button">生成界面设计稿</button>
+              </div>
+            </div>
+          </div>
+          <div id="designOutput" class="design-output">
+            <div class="empty-visual">
+              <p class="eyebrow">EMPTY DRAFT</p>
+              <strong>等待生成界面设计稿</strong>
+              <span>先生成交互设计方案，再上传画风参考图和关键词，点击「生成界面设计稿」。</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js?v=screen-direct-v1"></script>
+</body>
+</html>

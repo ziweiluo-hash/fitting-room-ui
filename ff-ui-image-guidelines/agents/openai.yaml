@@ -1,0 +1,4 @@
+interface:
+  display_name: "Free Fire UI Image Guidelines"
+  short_description: "Guide Free Fire UI image prompts, reviews, and icon direction."
+  default_prompt: "Use $ff-ui-image-guidelines to write or review a Free Fire-style UI image prompt."

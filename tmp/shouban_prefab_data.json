@@ -1,0 +1,212 @@
+[
+  {
+    "page": 1,
+    "row": 2,
+    "name": "UIGKCollectionRoom",
+    "meaning": "收藏室主界面 prefab。",
+    "position": "收藏室主页",
+    "details": "包含 15 个展示位、顶栏、编辑模式以及 Add/Remove/Exchange 操作。 页面 6 还补充了核心逻辑节点：EditBtn/SaveBtn/QuitBtn/ResetBtn、EditMode、LeftCollectionRoot、ModelIconEastList、ActivityPopMenuTrans/SortPopMenuTrans、ModelNumTrans/SelectModelLabel、GiftBtn/ExchangeBtn/EmoteBtn/PreviewModelBtn、ValueCntLabel/ProgressCntLabel/ActivityLabel、ERankBtn/ShareBtn/FriendListBtn。",
+    "image_note": "图片裁自 PDF 第 1 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCollectionRoom.png"
+  },
+  {
+    "page": 1,
+    "row": 3,
+    "name": "UIGKModelSlot",
+    "meaning": "展示柜单格 prefab。",
+    "position": "手办柜单格 / 展示柜格子",
+    "details": "用于 3D 模型挂点和增删换按钮状态机。大小通过根节点 scale 区分，需要同步大柜子 scale。页面 7 补充了 MainBtn、AddBtn/ExchangeBtn/RemoveBtn 等逻辑说明。",
+    "image_note": "图片裁自 PDF 第 1 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKModelSlot.png"
+  },
+  {
+    "page": 1,
+    "row": 4,
+    "name": "UIGKModelIconItem",
+    "meaning": "背包/列表中的手办 Icon 单项 prefab。",
+    "position": "背包 / 列表格子 / 背包单项",
+    "details": "支持选中、拖拽、稀有度框显示、数量显示和编号挂点。 页面 7 补充了 ItemBtn、DragItem+DragItemIcon、itemSprite/ItemIconView2、HL、Quality/QualityBG、Cnt、SpecialNumTrans 等关键节点。",
+    "image_note": "图片裁自 PDF 第 1 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKModelIconItem.png"
+  },
+  {
+    "page": 1,
+    "row": 5,
+    "name": "UIGKModelNum",
+    "meaning": "手办编号显示组件。",
+    "position": "编号显示 / 编号锚点",
+    "details": "用于挂载编号文本。页面 7 补充了 Num/NumBG、UIGKModelNum(UIPanel)、DetailTipsCamera 等节点，说明该编号带独立相机渲染，重新导出时不能丢失。",
+    "image_note": "图片裁自 PDF 第 1 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKModelNum.png"
+  },
+  {
+    "page": 2,
+    "row": 1,
+    "name": "UIGKCatalogPopup",
+    "meaning": "图鉴弹窗 prefab。",
+    "position": "图鉴弹窗",
+    "details": "页面 7 补充了 TabsContainer、GKModelTable、GKCatalogScrollView、ActivityLabel、CloseBtn 等节点。 GKModelTable 用于混排 section title 和 catalog item。",
+    "image_note": "图片裁自 PDF 第 2 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCatalogPopup.png"
+  },
+  {
+    "page": 2,
+    "row": 2,
+    "name": "UIGKCatalogItem",
+    "meaning": "图鉴网格单项 prefab。",
+    "position": "图鉴网格单格 / 图鉴单项",
+    "details": "页面 7 补充了 ItemIcon、QualityBG、Locked 等逻辑说明。 ItemIcon 根据 IconResId 解析图标，Locked 用于未解锁遮罩。",
+    "image_note": "图片裁自 PDF 第 2 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCatalogItem.png"
+  },
+  {
+    "page": 2,
+    "row": null,
+    "name": "UIGKCatalogSectionTitle",
+    "meaning": "图鉴品质分段标题 prefab。",
+    "position": "图鉴品质标题",
+    "details": "用于图鉴列表中不同品质或分段的标题展示。PDF 中未提供独立截图，只给出名称与用途。",
+    "image_note": "PDF 未提供独立配图。",
+    "image_path": ""
+  },
+  {
+    "page": 2,
+    "row": 4,
+    "name": "UIGKCatalogTab",
+    "meaning": "图鉴系列 Tab 容器 prefab。",
+    "position": "图鉴系列 Tab 容器",
+    "details": "用于承载图鉴系列切页项。截图中红框区域对应系列分类容器本身。",
+    "image_note": "图片裁自 PDF 第 2 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCatalogTab.png"
+  },
+  {
+    "page": 3,
+    "row": 1,
+    "name": "UIGKCatalogTabItem",
+    "meaning": "图鉴系列 Tab 单项 prefab。",
+    "position": "图鉴系列 Tab 单项",
+    "details": "PDF 文中名称写作 UIGKCatalogTabtem，这里按语义统一为 TabItem。 用于图鉴系列切页的单个标签项展示与交互。",
+    "image_note": "图片裁自 PDF 第 3 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCatalogTabItem.png"
+  },
+  {
+    "page": 3,
+    "row": 2,
+    "name": "UIGKCollectionNewGainPopWindow",
+    "meaning": "新获得手办弹窗 prefab。",
+    "position": "掉落 / 解锁提示弹窗",
+    "details": "页面 8 补充了 ModelSprite、GKModelName、SourceTimeAndMapLabel、NumTrans 等节点。 主要用于展示新获得手办的图片、名称、来源时间地图和编号。",
+    "image_note": "图片裁自 PDF 第 3 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCollectionNewGainPopWindow.png"
+  },
+  {
+    "page": 3,
+    "row": 3,
+    "name": "UIGKCollectionNewGainAllPopWindow",
+    "meaning": "批量获得手办的汇总弹窗 prefab。",
+    "position": "汇总弹窗",
+    "details": "作为批量获得结果的总弹窗容器，通常与 UIGKNewGainItem 配合展示多个手办结果。",
+    "image_note": "图片裁自 PDF 第 3 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCollectionNewGainAllPopWindow.png"
+  },
+  {
+    "page": 4,
+    "row": 1,
+    "name": "UIGKNewGainItem",
+    "meaning": "汇总弹窗中的单个 Item prefab。",
+    "position": "汇总弹窗 Item",
+    "details": "页面 8 补充了 ItemButton、SpecialNumTrans、FirstTag、QualityLine、QualityBG、itemSprite、ValueLabel。 支持点击进入 tips、显示编号、首次获得标记和品质信息。",
+    "image_note": "图片裁自 PDF 第 4 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKNewGainItem.png"
+  },
+  {
+    "page": 4,
+    "row": 2,
+    "name": "UIGKCollectionGKCatalogTipsBox",
+    "meaning": "大厅图鉴解锁提示 prefab。",
+    "position": "大厅图鉴解锁提示",
+    "details": "用于大厅内图鉴解锁相关提示。PDF 只给出了功能归属，没有展开更多节点定义。",
+    "image_note": "图片裁自 PDF 第 4 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCollectionGKCatalogTipsBox.png"
+  },
+  {
+    "page": 4,
+    "row": 3,
+    "name": "UILobbyV2GameAssistNewGKNoticeItem",
+    "meaning": "大厅小助手提示 Item prefab。",
+    "position": "小助手提示项",
+    "details": "用于大厅小助手中的手办相关提示或提醒展示。PDF 只给出了用途，没有展开节点细节。",
+    "image_note": "图片裁自 PDF 第 4 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UILobbyV2GameAssistNewGKNoticeItem.png"
+  },
+  {
+    "page": 5,
+    "row": 1,
+    "name": "UIGKCatalogItemTips",
+    "meaning": "点击图鉴 item 后弹出的 tips prefab。",
+    "position": "Item 点击 tips",
+    "details": "页面 8 补充了 MaskBtn、ContentTable、SmallItemTrans、FirstGainLabel、TimeLabel、MapAndPoiLabel、TeammateGrid。 用于展示未解锁/已解锁、首次获得时间、地图地点和队友来源等信息。",
+    "image_note": "图片裁自 PDF 第 5 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCatalogItemTips.png"
+  },
+  {
+    "page": 5,
+    "row": 1,
+    "name": "UIGKCatalogTipsTeammate",
+    "meaning": "tips 内队友来源条目 prefab。",
+    "position": "tips 里的队友条目",
+    "details": "作为 UIGKCatalogItemTips 的子项，用于展示局内获得队友列表或赠礼/交换来源玩家信息。",
+    "image_note": "共用 PDF 第 5 页 UIGKCatalogItemTips 的截图区域。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKCatalogTipsTeammate.png"
+  },
+  {
+    "page": 5,
+    "row": null,
+    "name": "BaseHeadTrans",
+    "meaning": "头像挂点 / 挂载节点。",
+    "position": "挂载 UIBaseHead",
+    "details": "PDF 将其列为挂载 UIBaseHead 的节点，更偏向容器/挂点概念，而非完整独立界面 prefab。",
+    "image_note": "PDF 仅提供文字说明，无独立配图。",
+    "image_path": ""
+  },
+  {
+    "page": 5,
+    "row": 3,
+    "name": "UIGKSmallItem",
+    "meaning": "小尺寸手办 item prefab。",
+    "position": "小助手 / tips 内的小尺寸 item",
+    "details": "供小助手和 tips 等信息密度较高的区域复用，展示缩略版手办项目。",
+    "image_note": "图片裁自 PDF 第 5 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKSmallItem.png"
+  },
+  {
+    "page": 5,
+    "row": 4,
+    "name": "UIGKEmoteUnLockPopWindow",
+    "meaning": "Emote 获取弹窗 prefab。",
+    "position": "Emote 获取弹窗",
+    "details": "用于 Emote 解锁/获取提示。截图展示了手办和 emote 关联后的弹窗表现。",
+    "image_note": "图片裁自 PDF 第 5 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKEmoteUnLockPopWindow.png"
+  },
+  {
+    "page": 6,
+    "row": 1,
+    "name": "UIGKEmoteChoose",
+    "meaning": "手办展示界面中的选择项 prefab。",
+    "position": "手办展示界面内 item 复用",
+    "details": "内部 item 复用 UIGKModelIconItem，用于在展示/选择界面中批量呈现可选手办。",
+    "image_note": "图片裁自 PDF 第 6 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UIGKEmoteChoose.png"
+  },
+  {
+    "page": 6,
+    "row": 2,
+    "name": "UINewVault",
+    "meaning": "更换 GK 按钮/入口相关 prefab。",
+    "position": "新增更换 GK 按钮",
+    "details": "PDF 中同时出现 ChangeGKBtn 文案，指向更换 GK 的入口按钮或其容器逻辑。",
+    "image_note": "图片裁自 PDF 第 6 页对应行。",
+    "image_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp\\prefab_crops\\UINewVault.png"
+  }
+]

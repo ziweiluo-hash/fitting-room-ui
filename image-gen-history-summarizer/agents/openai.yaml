@@ -1,0 +1,4 @@
+interface:
+  display_name: "AI生图总结"
+  short_description: "复盘 AI 生图过程，并沉淀流程、方法论与中文提示词。"
+  default_prompt: "Use $image-gen-history-summarizer to analyze these AI image records and return the full recap, simplified workflow, reusable methodology, and Chinese prompt takeaways."

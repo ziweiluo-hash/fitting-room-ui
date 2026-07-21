@@ -1,0 +1,182 @@
+--- PAGE 1 ---
+手办系统最终
+说明：其他prefab numTrans节点生成为挂载UIGKModelNum
+Prefab 作用 表现
+UIGKCollectionRoom 收藏室主页：
+15 展示位、
+顶栏、编辑模
+式、Add
+/Remove
+/Exchange
+UIGKModelSlot 手办柜单格：
+3D 模型挂点 
++ 增删换按钮
+状态机
+大小通过根节
+点scale区分
+需要同步大柜
+子scale
+UIGKModelIconItem 手办 Icon 项
+（背包/列表
+格子）
+UIGKModelNum 手办编号显示
+组件
+
+
+--- PAGE 2 ---
+UIGKCatalogPopup 图鉴弹窗
+UIGKCatalogItem 图鉴网格单格
+UIGKCatalogSectionTitle 图鉴品质标题
+UIGKCatalogTab 图鉴系列 
+Tab 容器
+
+
+--- PAGE 3 ---
+UIGKCatalogTabtem 图鉴系列 
+Tab 单项
+UIGKCollectionNewG
+ainPopWindow
+新获得手办弹
+窗（掉落/解
+锁提示）
+UIGKCollectionNewGainA
+llPopWindow
+汇总弹窗
+
+
+--- PAGE 4 ---
+UIGKNewGainItem 汇总弹窗Item
+UIGKCollectionGKCatalo
+gTipsBox
+大厅图鉴解锁
+UILobbyV2GameAssistNew
+GKNoticeItem
+小助手提示
+Item
+
+
+--- PAGE 5 ---
+UIGKCatalogItemTips item点击tips
+UIGKCatalogTipsTeammate tips里面队友
+条目
+BaseHeadTrans 挂载 UIBaseHead
+UIGKSmallItem 小助手以及
+tips里面的小
+尺寸item
+UIGKEmoteUnLockPopWind
+ow
+Emote获取弹
+窗
+
+
+--- PAGE 6 ---
+UIGKEmoteChoose 手办展示界面
+里面item复用
+UIGKModelI
+conItem
+UINewVault 新增更换gk按
+钮
+ChangeGKBtn
+七、View 中有逻辑作用的节点（特别提示）
+UIGKCollectionRoom（主界面）
+节点 类型 逻辑作用 / 提示
+EditBtn/ / /SaveBtn QuitBtn Rese
+tBtn
+UIButton 正常/编辑态操作； →进编辑， →编辑态保存/放弃/重置；EditBtn Save/Quit/Reset Ref
+联动 reshModeVisibility EditBtnEditMode
+EditMode GameObject 编辑态面板根， 显隐总开关SetEditMode
+LeftCollectionRoot Transform 编辑态背包区根；
+ModelIconEastList UIEasyList 背包列表；
+ActivityPopMenuTrans/SortPop
+MenuTrans
+Transform 筛选 / 排序两个 PopMenu 挂载Prefab UIPopMenuSmall
+ModelNumTrans/SelectModelLab
+el
+Transform/Ga
+meObject
+底部选中手办信息；编号走 挂到UIGKModelNum ModelNumTrans
+GiftBtn/ / /ExchangeBtn EmoteBtn
+PreviewModelBtn
+GameObject 底部操作入口；赠送/交换按钮显隐须受 / 开关控制（OB56）CanGift CanTrade 
+ValueCntLabel/ProgressCntLab
+/el ActivityLabel
+UILabel 收藏值 / 图鉴进度 / 活动名
+ERankBtn/ /ShareBtn FriendList
+Btn
+UIButton/Gam
+eObject
+排行 / 分享 / 好友入口（OB56）
+UIGKModelSlot（展示柜格子）
+
+--- PAGE 7 ---
+节点 类
+型
+逻辑作用 / 提示
+MainBtn UIB
+utt
+on
+格子主体点击（选中/放置/换位路由）。 ，由提示：其 节点需挂 作为拖拽落点 surfaceMain BoxCollider EnsureDropT
+保障； 未作为导出字段，靠代码 命中argetCollider Main GetComponentInParent
+AddBtn/Exchange
+/Btn RemoveBtn
+UIB
+utt
+on
+空格加号 / 交换 / 撤下三态按钮， 按当前选中态联动显隐RefreshButtons
+UIGKModelIconItem（背包单项）
+节点 类型 逻辑作用 / 提示
+ItemBtn UIButton 选中 / 取消选中（选中态唯一真相在 Room）
+DragItem+DragItemIcon GameObject+UISprite 拖拽克隆体，运行时 （source=BagItem）AddComponent<UIGKModelDragDropItem>
+itemSprite/ItemIconView2 UISprite/BaseItemV
+iew2
+同一节点(index 3)的两个组件；图标经 →IconResId UIUtils.
+解析GetAtlasSpriteByResourceID
+HL GameObject 选中高亮
+Quality/QualityBG UISprite 稀有度框（由 值驱动 spriteName）Quality
+Cnt UILabel 堆叠数； 隐藏Count==1
+SpecialNumTrans Transform 编号手办编号锚点（挂 ， 显示）UIGKModelNum Number>0
+Download/ /Descargar GuideW
+idget
+- 本轮未用，隐藏
+UIGKModelNum（编号）
+节点 类型 逻辑作用 / 提示
+Num/NumBG UILabel 编号前景 / 描边文本
+UIGKModelNum UIPanel 编号面板（depth 层级控制）
+DetailTipsCamera Camera 提示：编号带独立相机渲染，重新导出勿丢
+UIGKCatalogItem图鉴单项）
+节点 逻辑作用 / 提示
+ItemIcon 图鉴图标（ 解析，未解锁置灰）IconResId
+QualityBG 稀有度着色
+Locked 未解锁遮罩， 控制IsUnlocked
+UIGKCatalogPopup（图鉴弹窗）
+节点 逻辑作用 / 提示
+TabsContainer
+GKModelTable 图鉴主体 ，混排 section title 和 catalog item。UITable2
+GKCatalogScrollView 图鉴滚动区域。
+ActivityLabel 当前导出但 controller 未实际设置。
+CloseBtn 关闭图鉴。
+UIGKCollectionNewGainPopWindow（新获得拍脸弹窗）
+节点 类型 逻辑作用 / 提示
+
+--- PAGE 8 ---
+ModelSprite/ /GKModelName SourceTimeAndMap
+/Label NumTrans
+UISprite/ / /UILabel UILabel 
+Transform
+新获得手办图 / 名称 / 带出时间地图 / 编号锚点；数据
+待 OB56 带出结算协议
+UIGKCatalogItemTips
+节点 当前作用
+MaskBtn 点击关闭 tips。
+ContentTable tips 内容重新排版。
+SmallItemTrans 小手办 icon 子 controller 挂点。
+FirstGainLabel 其父节点被当作获得信息区域 root，用于整体显示/隐藏。
+TimeLabel 首次获得时间。
+MapAndPoiLabel 地图/地点显示节点，代码会从它或子节点找 。UILabel
+TeammateGrid 局内获得队友列表，或赠礼/交换来源玩家。
+UIGKNewGainItem
+节点 当前作用
+ItemButton 点击打开图鉴 tips。
+SpecialNumTrans 编号显示挂点。
+FirstTag 首次获得标记。
+QualityLine / QualityBG / itemSprite / ValueLabel 品质、图标、收藏值展示。

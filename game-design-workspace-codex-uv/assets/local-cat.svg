@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 220" role="img" aria-label="本地小猫素材">
+  <defs>
+    <linearGradient id="catBody" x1="40" y1="20" x2="200" y2="210" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff8e8"/>
+      <stop offset="1" stop-color="#ffe1c3"/>
+    </linearGradient>
+    <linearGradient id="catEye" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#55342b"/>
+      <stop offset="1" stop-color="#c57a45"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="120" cy="196" rx="88" ry="18" fill="#f4d9c8" opacity=".36"/>
+  <path d="M56 92 C38 42 45 30 88 62 C108 54 134 54 154 62 C197 30 204 42 184 92 C194 108 198 128 192 148 C182 184 150 204 120 204 C90 204 58 184 48 148 C42 128 46 108 56 92Z" fill="url(#catBody)" stroke="#6b3c32" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M68 70 C61 52 64 48 82 62" fill="#ffc6c6" stroke="#6b3c32" stroke-width="5" stroke-linecap="round"/>
+  <path d="M172 62 C190 48 193 52 184 70" fill="#ffc6c6" stroke="#6b3c32" stroke-width="5" stroke-linecap="round"/>
+  <path d="M96 58 C104 78 112 86 122 88" fill="none" stroke="#f6a65e" stroke-width="8" stroke-linecap="round"/>
+  <path d="M122 56 C124 76 132 84 142 86" fill="none" stroke="#f6a65e" stroke-width="8" stroke-linecap="round"/>
+  <path d="M176 116 C190 118 198 122 205 130" fill="none" stroke="#f6a65e" stroke-width="7" stroke-linecap="round"/>
+  <path d="M64 116 C50 118 42 122 35 130" fill="none" stroke="#f6a65e" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="88" cy="124" rx="18" ry="23" fill="url(#catEye)"/>
+  <ellipse cx="152" cy="124" rx="18" ry="23" fill="url(#catEye)"/>
+  <circle cx="82" cy="116" r="6" fill="#fff"/>
+  <circle cx="146" cy="116" r="6" fill="#fff"/>
+  <path d="M116 148 C119 145 121 145 124 148 C123 153 117 153 116 148Z" fill="#df7f76" stroke="#6b3c32" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M120 153 C116 162 106 162 102 154" fill="none" stroke="#6b3c32" stroke-width="4" stroke-linecap="round"/>
+  <path d="M120 153 C124 162 134 162 138 154" fill="none" stroke="#6b3c32" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="66" cy="148" rx="18" ry="10" fill="#ffb7ae" opacity=".52"/>
+  <ellipse cx="174" cy="148" rx="18" ry="10" fill="#ffb7ae" opacity=".52"/>
+</svg>

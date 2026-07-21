@@ -1,0 +1,44 @@
+{
+  "ok": true,
+  "provider": "babylon-local",
+  "model": "gpt-image-2",
+  "layers": [
+    {
+      "id": "icon",
+      "label": "icon",
+      "prompt": "You are separating a single game UI screenshot into semantic layers.\nTarget layer: icon.\nSource image name: babylon-cartoon-flat-ui-controls.png.\nUse the attached source image as the only truth.\nRebuild the output at the same overall composition, pixel placement and camera framing as the source image.\nReturn one PNG with transparent background and alpha channel.\nKeep only the requested layer. Everything else must become fully transparent.\nDo not redesign, beautify, relayout, restyle, repaint the whole image, or invent any new object.\nIf the requested layer does not exist, return an empty transparent canvas instead of hallucinating content.\nDo not add text, labels, watermarks, guides, shadows of removed objects, or background fill behind transparent areas.\nScene hint from user: flat ui controls on a plain background\nIcon hint from user: buttons, symbols, circular pads, badges, icons\nKeep only icon glyphs or symbolic marks used by the UI: arrows, currency symbols, gears, chest marks, plus signs, badges, small semantic pictograms and similar icon content.\nRemove icon carrier plates, button backings, slots, circular pads, panel frames, texts, characters and the scene background.\nIf an icon is fused with a backing shape, keep only the readable icon glyph and make the rest transparent as much as possible.",
+      "imageUrl": "https://babylon.garenanow.com/resources/output/2026/06/16/ui_chaitu_icon_1781593491863/generated_image_20260616_150553_282_1.png",
+      "images": [
+        "https://babylon.garenanow.com/resources/output/2026/06/16/ui_chaitu_icon_1781593491863/generated_image_20260616_150553_282_1.png"
+      ],
+      "files": [
+        {
+          "filename": "generated_image_20260616_150553_282_1.png",
+          "url": "https://babylon.garenanow.com/resources/output/2026/06/16/ui_chaitu_icon_1781593491863/generated_image_20260616_150553_282_1.png",
+          "mime_type": "image/png"
+        }
+      ],
+      "filename": "babylon-cartoon-flat-ui-controls-icon.png",
+      "durationMs": 61572
+    },
+    {
+      "id": "icon_plate",
+      "label": "icon底板",
+      "prompt": "You are separating a single game UI screenshot into semantic layers.\nTarget layer: icon底板.\nSource image name: babylon-cartoon-flat-ui-controls.png.\nUse the attached source image as the only truth.\nRebuild the output at the same overall composition, pixel placement and camera framing as the source image.\nReturn one PNG with transparent background and alpha channel.\nKeep only the requested layer. Everything else must become fully transparent.\nDo not redesign, beautify, relayout, restyle, repaint the whole image, or invent any new object.\nIf the requested layer does not exist, return an empty transparent canvas instead of hallucinating content.\nDo not add text, labels, watermarks, guides, shadows of removed objects, or background fill behind transparent areas.\nIf a second reference image is attached, image 1 is the original full screenshot and image 2 is the icon-only extraction. Use image 2 only to locate which icon carriers belong to UI icons.\nScene hint from user: flat ui controls on a plain background\nIcon hint from user: buttons, symbols, circular pads, badges, icons\nKeep only icon carrier or backing shapes that directly belong to UI icons: circular pads, icon plates, slots, chips, capsules, tiny button bases or small decorative holders immediately behind icons.\nDo not keep large scene objects, decorative environment props, wall ornaments, background cards, full panels, full buttons, large containers, or any shape that belongs to the scene background instead of the icon.\nRemove icon glyphs themselves, remove text, remove numbers, remove characters and remove the scene background.\nIf an icon sits on a large button or large panel, keep only the local icon carrier area around the icon, not the whole button or whole panel.\nPreserve the original placement and silhouette of each retained backing shape, but never merge them into a full-screen background region.",
+      "imageUrl": "https://babylon.garenanow.com/resources/output/2026/06/16/ui_chaitu_icon_plate_1781593554451/generated_image_20260616_150712_545_1.png",
+      "images": [
+        "https://babylon.garenanow.com/resources/output/2026/06/16/ui_chaitu_icon_plate_1781593554451/generated_image_20260616_150712_545_1.png"
+      ],
+      "files": [
+        {
+          "filename": "generated_image_20260616_150712_545_1.png",
+          "url": "https://babylon.garenanow.com/resources/output/2026/06/16/ui_chaitu_icon_plate_1781593554451/generated_image_20260616_150712_545_1.png",
+          "mime_type": "image/png"
+        }
+      ],
+      "filename": "babylon-cartoon-flat-ui-controls-icon-plate.png",
+      "durationMs": 78424
+    }
+  ],
+  "totalDurationMs": 142018
+}

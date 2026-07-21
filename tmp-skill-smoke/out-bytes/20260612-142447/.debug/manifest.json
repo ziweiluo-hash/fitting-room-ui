@@ -1,0 +1,40 @@
+{
+  "input_image": null,
+  "input_staged_path": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\source\\chat-image.png",
+  "input_original_path": null,
+  "input_original_name": "chat-image.png",
+  "input_sha256": "6b7fa434f92a8b80aab02d9bf1a12e49ffcae424e4013a1c4f68b67e3d2bbcd0",
+  "input_source_deleted": true,
+  "prompt_file": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\prompt.txt",
+  "generation_model": "gemini-3-pro-image-preview",
+  "rmbg_model": "rmbg",
+  "count": 4,
+  "background": "#2b2b2b",
+  "source_size": [
+    1,
+    1
+  ],
+  "target_canvas_size": [
+    2,
+    2
+  ],
+  "exclude": null,
+  "aspect_ratio": "1:1",
+  "resolution": "2K",
+  "rmbg_weights": "Matting-HR",
+  "rmbg_fallback_weights": "solid",
+  "rmbg_resolution": "2048x2048",
+  "generated": [
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\generated\\ui-kit-01.png",
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\generated\\ui-kit-02.png",
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\generated\\ui-kit-03.png",
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\generated\\ui-kit-04.png"
+  ],
+  "transparent": [
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\transparent\\ui-kit-01-transparent.png",
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\transparent\\ui-kit-02-transparent.png",
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\transparent\\ui-kit-03-transparent.png",
+    "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\transparent\\ui-kit-04-transparent.png"
+  ],
+  "overview": "C:\\Users\\ziwei.luo\\Documents\\New project\\tmp-skill-smoke\\out-bytes\\20260612-142447\\overview.png"
+}

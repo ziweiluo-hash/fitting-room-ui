@@ -1,0 +1,21 @@
+{
+  "name": "ui-naming-cli",
+  "version": "0.1.0",
+  "description": "Framework-agnostic CLI for generating and validating UI component naming conventions.",
+  "type": "commonjs",
+  "bin": {
+    "ui-naming": "./dist/src/bin/ui-naming.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/**/*.test.js",
+    "start": "npm run build && node dist/src/bin/ui-naming.js"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "typescript": "^5.8.3"
+  }
+}

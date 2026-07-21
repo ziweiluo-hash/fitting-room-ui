@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI 拆图工具</title>
+  <link rel="stylesheet" href="ui-chaitu.css">
+</head>
+<body>
+  <main class="split-app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">UI IMAGE SPLITTER</p>
+        <h1>UI 拆图工具</h1>
+        <p class="intro">支持单张和批量上传。可拆出背景、角色或宠物、icon、icon 底板；勾选“背景元素单独拆开”后，会额外输出“背景底图”和“背景元素”两层透明 PNG。</p>
+      </div>
+      <a class="ghost-link" href="/">返回工作台</a>
+    </section>
+
+    <section class="panel input-panel">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">INPUT</p>
+          <h2>上传与设置</h2>
+        </div>
+      </div>
+
+      <label class="upload-zone" for="sourceImage">
+        <input id="sourceImage" type="file" accept="image/*" multiple hidden>
+        <strong>上传源图</strong>
+        <span>支持 png / jpg / webp，可一次选择多张，也可以直接拖进来</span>
+      </label>
+
+      <div class="preview-grid">
+        <div class="preview-card source-preview-card">
+          <div class="preview-card-head">
+            <strong>源图预览</strong>
+            <span id="sourceMeta">未选择图片</span>
+          </div>
+          <div id="sourcePreview" class="source-preview empty">上传后可点击下方文件名预览，不会默认选中</div>
+          <div id="sourceList" class="source-list"></div>
+        </div>
+
+        <div class="control-card">
+          <label class="field">
+            <span>图像模型</span>
+            <select id="imageModel">
+              <option value="gpt-image-2" selected>IMAGE 2</option>
+              <option value="gemini-3.1-flash-image-preview">Banana 2.0 NEW</option>
+              <option value="gemini-3-pro-image-preview">Banana Pro</option>
+              <option value="gpt-image-1.5">GPT 1.5</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>场景拆分策略</span>
+            <select id="sceneProfile">
+              <option value="auto" selected>自动判断</option>
+              <option value="indoor_furniture">室内 / 家具场景</option>
+              <option value="outdoor_architecture">户外 / 建筑场景</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>场景补充说明</span>
+            <textarea id="sceneHint" rows="3" placeholder="例如：这是室内客厅场景，沙发、地毯、落地灯都属于背景元素，墙面和地板属于背景底图。"></textarea>
+          </label>
+
+          <label class="field">
+            <span>角色识别提示</span>
+            <input id="characterHint" type="text" placeholder="例如：主角色、宠物、小精灵、右侧立绘">
+          </label>
+
+          <label class="field">
+            <span>Icon 识别提示</span>
+            <input id="iconHint" type="text" placeholder="例如：货币图标、齿轮、返回箭头、宝箱、红点">
+          </label>
+
+          <div class="target-grid">
+            <label class="target-toggle">
+              <input id="targetBackground" type="checkbox" checked>
+              <span>背景</span>
+            </label>
+            <label class="target-toggle">
+              <input id="targetCharacter" type="checkbox" checked>
+              <span>角色 / 宠物</span>
+            </label>
+            <label class="target-toggle">
+              <input id="targetIcon" type="checkbox" checked>
+              <span>icon</span>
+            </label>
+            <label class="target-toggle">
+              <input id="targetIconPlate" type="checkbox" checked>
+              <span>icon 底板</span>
+            </label>
+          </div>
+
+          <label class="sub-toggle">
+            <input id="splitBackgroundElements" type="checkbox">
+            <div>
+              <strong>背景元素单独拆开</strong>
+              <span>拆出独立背景元素。</span>
+            </div>
+          </label>
+
+          <label class="sub-toggle">
+            <input id="splitBackgroundObjects" type="checkbox" checked>
+            <div>
+              <strong>背景元素按物体逐张导出</strong>
+              <span>按独立物体分别下载。</span>
+            </div>
+          </label>
+
+          <div class="action-row">
+            <button id="runSplit" class="primary-button" type="button">开始拆图</button>
+            <button id="resetForm" class="secondary-button" type="button">清空</button>
+          </div>
+
+          <p id="runStatus" class="status-text">等待上传图片。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel result-panel">
+      <div class="panel-head result-panel-head">
+        <div>
+          <p class="eyebrow">OUTPUT</p>
+          <h2>拆图结果</h2>
+        </div>
+      </div>
+      <div id="resultGrid" class="result-group-list">
+        <article class="result-empty">
+          <strong>结果会显示在这里</strong>
+          <span>批量模式下会按源图分组展示；每组结果里都可以直接下载全部结果或单张 PNG。</span>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="ui-chaitu.js"></script>
+</body>
+</html>

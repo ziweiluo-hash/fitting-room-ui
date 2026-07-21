@@ -1,0 +1,5 @@
+2026/06/12-15:36:23.600 9a28 Creating DB C:\Users\ziwei.luo\Documents\New project\game-design-workspace-codex-uv\.runtime-temp\game_ux_pdf_9p6poq0_\profile\Default\EdgeCoupons/coupons_data.db since it was missing.
+2026/06/12-15:36:23.609 9a28 Reusing MANIFEST C:\Users\ziwei.luo\Documents\New project\game-design-workspace-codex-uv\.runtime-temp\game_ux_pdf_9p6poq0_\profile\Default\EdgeCoupons/coupons_data.db/MANIFEST-000001
+2026/06/12-15:36:23.751 a7f0 Level-0 table #5: started
+2026/06/12-15:36:23.757 a7f0 Level-0 table #5: 682669 bytes OK
+2026/06/12-15:36:23.759 a7f0 Delete type=0 #3

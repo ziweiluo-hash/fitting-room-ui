@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>切图命名面板</title>
+  <link rel="stylesheet" href="./shared/panel.css" />
+</head>
+<body>
+  <div class="plugin-shell compact-shell">
+    <header class="plugin-header compact-header">
+      <div class="title-stack">
+        <div class="title-row">
+          <div class="title-copy">
+            <p class="eyebrow">Photoshop CEP 插件</p>
+            <h1>切图命名面板</h1>
+          </div>
+          <button id="refresh-target" class="icon-button" type="button" title="刷新当前选中对象" aria-label="刷新当前选中对象">&#x21bb;</button>
+        </div>
+        <div id="selected-target-banner" class="target-banner fail">当前未识别到选中图层</div>
+        <p class="subtitle">用于重命名并导出当前选中的组、图层或画板。</p>
+      </div>
+    </header>
+
+    <main class="panel-grid single-column">
+      <section class="panel">
+        <div class="section-head">
+          <h2>命名生成</h2>
+          <p>前缀固定为 UI，选项内容保持英文。</p>
+        </div>
+        <form id="naming-form" class="form-grid">
+          <label>
+            <span>前缀</span>
+            <div id="prefix-display" class="fixed-field" aria-readonly="true">UI</div>
+          </label>
+          <label>
+            <span>关键词</span>
+            <input id="keyword" name="keyword" type="text" value="Product" />
+          </label>
+          <label>
+            <span>组件类型</span>
+            <select id="component-type" name="componentType"></select>
+          </label>
+          <label>
+            <span>状态</span>
+            <select id="state" name="state"></select>
+          </label>
+          <label>
+            <span>编号</span>
+            <select id="number" name="number"></select>
+          </label>
+          <label>
+            <span>尺寸</span>
+            <select id="size" name="size"></select>
+          </label>
+          <label class="full-width">
+            <span>导出格式</span>
+            <select id="export-format" name="exportFormat"></select>
+          </label>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="section-head">
+          <h2>生成结果</h2>
+          <p>可以一键复制完整名称，或直接导出当前选中对象。</p>
+        </div>
+        <div class="result-card">
+          <p class="card-label">完整名称</p>
+          <input id="full-name" class="full-name-field" type="text" value="UIProductButton" readonly />
+          <p class="hint">顺序：前缀 / 关键词 / 组件类型 / 状态 / 编号 / 尺寸</p>
+        </div>
+        <div class="action-row compact-actions">
+          <button id="copy-full-name" class="secondary-button" type="button">一键复制完整名称</button>
+          <button id="export-now" class="primary-button" type="button">导出当前选中对象</button>
+        </div>
+      </section>
+    </main>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>校验结果</h2>
+        <p>实时检查允许字符和禁用词，重复命名会在导出前检查。</p>
+      </div>
+      <ul id="validation-results" class="validation-list"></ul>
+    </section>
+
+    <section class="panel">
+      <div class="section-head">
+        <h2>状态</h2>
+        <p>显示 Photoshop CEP 宿主侧的执行结果。</p>
+      </div>
+      <div id="status-message" class="status-message idle">已就绪。</div>
+    </section>
+  </div>
+  <script src="./shared/naming-core.js"></script>
+  <script src="./shared/panel-app.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

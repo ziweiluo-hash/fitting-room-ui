@@ -1,0 +1,4 @@
+interface:
+  display_name: "Babylon API Caller"
+  short_description: "Build and debug Babylon dock, agent-dock, upload, and polling requests."
+  default_prompt: "Use this skill when the request mentions Babylon, bbl, dock, agent-dock, files/upload, task polling, model routing, or Babylon payload debugging. Construct the correct Babylon request, choose supported models, and handle uploads, auth, and polling correctly."

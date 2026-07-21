@@ -1,0 +1,66 @@
+2026-06-12 07:36:20.856: [INFO] OnDoneLoading sync enabled: 0
+2026-06-12 07:36:20.858: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-06-12 07:36:21.188: [INFO] VisibilityChanged: 0
+2026-06-12 07:36:22.495: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 0
+2026-06-12 07:36:22.504: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-06-12 07:36:22.512: [INFO] Primary account changed.
+2026-06-12 07:36:22.512: [INFO] OnPrimaryAccountChanged PrimaryAccountChangeEvent::Type::kSet
+2026-06-12 07:36:22.517: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-06-12 07:36:22.542: [INFO] RecordSyncInitDuration has_sync_been_enabled: 0 state: 3
+2026-06-12 07:36:28.017: [INFO] VisibilityChanged: 1
+2026-06-12 07:36:28.205: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.207: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.208: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.209: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.210: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.211: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.212: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.213: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.215: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.216: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.217: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.218: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.219: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.220: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.221: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.222: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.223: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.224: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.225: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.226: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.227: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.228: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.228: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.229: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.230: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.231: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.231: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.233: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.233: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.234: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.235: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.236: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.237: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.238: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.239: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.239: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.240: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.241: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.242: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.243: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.244: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.244: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.245: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.246: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.247: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.248: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.249: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.250: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.250: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.251: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.252: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.252: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.253: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.254: [INFO] BookmarkNodeAdded, ABU: 0
+2026-06-12 07:36:28.822: [INFO] Sync initialization duration: 6109ms
+2026-06-12 07:36:30.392: [INFO] VisibilityChanged: 0

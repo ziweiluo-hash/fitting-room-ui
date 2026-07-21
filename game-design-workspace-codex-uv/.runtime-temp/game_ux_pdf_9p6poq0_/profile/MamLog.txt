@@ -1,0 +1,15 @@
+[2026-06-12T07:36:22.513Z] [INFO] ========================================================================================================================
+[2026-06-12T07:36:22.513Z] [INFO] Initializing MAM Client.
+App: com.microsoft.edge 149.0.4022.62
+SDK: 2.1.367.0
+OS: windows 10.0.26100.8246
+DeviceType: Desktop
+Manufacturer: Dell Inc.
+Model: Precision 3650 Tower
+Telemetry: yes
+Managed device support: enabled
+[2026-06-12T07:36:22.519Z] [INFO] Telemetry session f01d469a-08df-49ca-b591-fa6dbe983d5f.
+[2026-06-12T07:36:22.519Z] [INFO] Initializing cache (v1).
+[2026-06-12T07:36:30.447Z] [INFO] Shutting down.
+[2026-06-12T07:36:30.447Z] [INFO] Stopping the task scheduler and canceling any outstanding work items...
+[2026-06-12T07:36:30.447Z] [INFO] Task scheduler has stopped, and all work has been canceled.
