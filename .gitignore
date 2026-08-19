@@ -1,2 +1,5 @@
 ~$*.xlsx
 node_modules/
+cake-review-bot/cake_reviews.sqlite3
+__pycache__/
+*.pyc
