@@ -48,7 +48,7 @@ def connect() -> sqlite3.Connection:
 def init_db() -> None:
     with connect() as db:
         db.executescript("""
-            CREATE TABLE IF NOT EXISTS periods (id INTEGER PRIMARY KEY AUTOINCREMENT, conversation_id TEXT NOT NULL, title TEXT NOT NULL, review_date TEXT NOT NULL DEFAULT '', starts_at TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'open', created_by TEXT NOT NULL, UNIQUE(conversation_id, title));
+            CREATE TABLE IF NOT EXISTS periods (id INTEGER PRIMARY KEY AUTOINCREMENT, conversation_id TEXT NOT NULL, title TEXT NOT NULL, display_title TEXT NOT NULL DEFAULT '本期蛋糕测评', review_date TEXT NOT NULL DEFAULT '', starts_at TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'open', created_by TEXT NOT NULL, UNIQUE(conversation_id, title));
             CREATE TABLE IF NOT EXISTS cakes (id INTEGER PRIMARY KEY AUTOINCREMENT, period_id INTEGER NOT NULL REFERENCES periods(id) ON DELETE CASCADE, name TEXT NOT NULL, position INTEGER NOT NULL, UNIQUE(period_id, name));
             CREATE TABLE IF NOT EXISTS reviews (id INTEGER PRIMARY KEY AUTOINCREMENT, cake_id INTEGER NOT NULL REFERENCES cakes(id) ON DELETE CASCADE, reviewer_id TEXT NOT NULL, rating TEXT NOT NULL CHECK(rating IN ('夯','顶级','人上人','NPC','拉完了')), updated_at TEXT NOT NULL, UNIQUE(cake_id, reviewer_id));
         """)
@@ -58,9 +58,11 @@ def init_db() -> None:
         period_columns = {row["name"] for row in db.execute("PRAGMA table_info(periods)")}
         if "review_date" not in period_columns:
             db.execute("ALTER TABLE periods ADD COLUMN review_date TEXT NOT NULL DEFAULT ''")
+        if "display_title" not in period_columns:
+            db.execute("ALTER TABLE periods ADD COLUMN display_title TEXT NOT NULL DEFAULT '本期蛋糕测评'")
 
 
-def create_period(conversation_id: str, title: str, cakes: list[dict] | list[str], creator_id: str, review_date: str = "") -> int:
+def create_period(conversation_id: str, title: str, cakes: list[dict] | list[str], creator_id: str, review_date: str = "", display_title: str = "本期蛋糕测评") -> int:
     normalized = [{"name": item, "brand": "", "image_url": ""} if isinstance(item, str) else item for item in cakes]
     normalized = [{"name": str(item.get("name", "")).strip(), "brand": str(item.get("brand", "")).strip(), "image_url": str(item.get("image_url", "")).strip()} for item in normalized]
     normalized = [item for item in normalized if item["name"]]
@@ -70,7 +72,7 @@ def create_period(conversation_id: str, title: str, cakes: list[dict] | list[str
         raise ValueError("单期最多 20 款蛋糕，且名称不能重复")
     with connect() as db:
         db.execute("UPDATE periods SET status='closed' WHERE conversation_id=? AND status='open'", (conversation_id,))
-        period_id = db.execute("INSERT INTO periods(conversation_id,title,review_date,starts_at,created_by) VALUES(?,?,?,?,?)", (conversation_id, title, review_date.strip(), now(), creator_id)).lastrowid
+        period_id = db.execute("INSERT INTO periods(conversation_id,title,display_title,review_date,starts_at,created_by) VALUES(?,?,?,?,?,?)", (conversation_id, title, display_title.strip() or "本期蛋糕测评", review_date.strip(), now(), creator_id)).lastrowid
         db.executemany("INSERT INTO cakes(period_id,name,brand,image_url,position) VALUES(?,?,?,?,?)", [(period_id, item["name"], item["brand"], item["image_url"], i) for i, item in enumerate(normalized, 1)])
     return int(period_id)
 
@@ -172,7 +174,7 @@ def report_image(conversation_id: str, period_id: int | None = None) -> Image.Im
     for row in rows: grouped[tier_for(row["average"])].append(row)
     card_w, card_h, left_w, pad = 220, 264, 160, 24
     max_cards = max(1, *(len(items) for items in grouped.values()))
-    title = "本期蛋糕测评" if period else "历史总榜"
+    title = period["display_title"] if period else "历史总榜"
     date_label = f" · {period['review_date']}" if period and period["review_date"] else ""
     header_text = f"杀糕测评 · {title}{date_label}"
     width = max(left_w + pad + max_cards * (card_w + pad) + pad, ImageDraw.Draw(Image.new("RGB", (1, 1))).textbbox((0, 0), header_text, font=font(32, True))[2] + 48)
@@ -212,6 +214,19 @@ def decode_action(value: str) -> dict:
     return json.loads(base64.urlsafe_b64decode(value + "=" * (-len(value) % 4)))
 
 
+def encode_payload(payload: dict) -> str:
+    return base64.urlsafe_b64encode(json.dumps(payload, ensure_ascii=False).encode()).decode().rstrip("=")
+
+
+def history_menu(conversation_id: str) -> dict:
+    """供 SeaTalk 消息卡片渲染的往期选择按钮。"""
+    options = []
+    for period in list_periods(conversation_id):
+        label = f"{period['display_title']} · {period['review_date'] or period['starts_at'][:10]}"
+        options.append({"text": label[:50], "value": encode_payload({"type": "history", "p": period["id"]})})
+    return {"title": "选择往期测评", "options": options}
+
+
 def card_spec(conversation_id: str) -> dict:
     period = current_period(conversation_id)
     if not period: raise ValueError("当前没有进行中的测评")
@@ -239,7 +254,13 @@ def process_event(payload: dict) -> str:
     sender, conversation, action, text = event_fields(payload)
     if action:
         try:
-            choice = decode_action(action); record_review(int(choice["p"]), int(choice["c"]), sender, choice["r"])
+            choice = decode_action(action)
+            if choice.get("type") == "history":
+                period = period_by_id(conversation, int(choice["p"]))
+                if not period: return "该期测评已不存在。"
+                suffix = f"/api/report.png?conversation_id={conversation}&period_id={period['id']}"
+                return f"{period['display_title']} · {period['review_date']}：{PUBLIC_BASE_URL + suffix if PUBLIC_BASE_URL else suffix}"
+            record_review(int(choice["p"]), int(choice["c"]), sender, choice["r"])
             return "已记录你的评分（重复点击会更新为最后一次选择）。"
         except (ValueError, KeyError, json.JSONDecodeError, UnicodeDecodeError): return "评分按钮已失效，请让管理员重新发布本期测评。"
     text = text.strip()
@@ -249,11 +270,15 @@ def process_event(payload: dict) -> str:
     if text in ("往期", "往期列表"):
         periods = list_periods(conversation)
         if not periods: return "暂无往期测评。"
-        return "📚 往期测评\n" + "\n".join(f"{row['id']}. {row['review_date'] or row['starts_at'][:10]}｜{'进行中' if row['status'] == 'open' else '已结束'}\n   查看往期 {row['id']}｜往期测评图 {row['id']}" for row in periods)
+        return "📚 往期测评\n" + "\n".join(f"{row['id']}. {row['display_title']} · {row['review_date'] or row['starts_at'][:10]}｜{'进行中' if row['status'] == 'open' else '已结束'}" for row in periods)
+    if text in ("选择往期", "往期选择"):
+        return "请发布往期选择卡片：/api/history-menu?conversation_id=" + conversation
     past_match = re.fullmatch(r"查看往期\s+(\d+)", text)
     if past_match:
         period = period_by_id(conversation, int(past_match.group(1)))
-        return format_ranking(f"{period['review_date']}｜往期排名", ranking(conversation, period["id"])) if period else "找不到该期测评。"
+        if not period: return "找不到该期测评。"
+        suffix = f"/api/report.png?conversation_id={conversation}&period_id={period['id']}"
+        return f"{period['review_date']} 测评图：{PUBLIC_BASE_URL + suffix if PUBLIC_BASE_URL else suffix}"
     past_image_match = re.fullmatch(r"往期测评图\s+(\d+)", text)
     if past_image_match:
         period = period_by_id(conversation, int(past_image_match.group(1)))
@@ -271,6 +296,14 @@ def process_event(payload: dict) -> str:
         review_date = date_match.group(1).strip()
         with connect() as db: db.execute("UPDATE periods SET review_date=? WHERE id=?", (review_date, period["id"]))
         return f"已将本期测评图日期改为：{review_date}"
+    title_match = re.fullmatch(r"设标题\s+(.+)", text)
+    if title_match:
+        if ADMIN_IDS and sender not in ADMIN_IDS: return "只有管理员可以修改本期标题。"
+        period = current_period(conversation)
+        if not period: return "当前没有进行中的测评。"
+        display_title = title_match.group(1).strip()
+        with connect() as db: db.execute("UPDATE periods SET display_title=? WHERE id=?", (display_title, period["id"]))
+        return f"已将本期测评图标题改为：{display_title}"
     match = re.fullmatch(r"开期\s+(.+?)\s*[:：]\s*(.+)", text)
     if match:
         if ADMIN_IDS and sender not in ADMIN_IDS: return "只有管理员可以开新一期测评。"
@@ -281,7 +314,7 @@ def process_event(payload: dict) -> str:
         review_date = match.group(1).strip()
         period_id = create_period(conversation, review_date, cakes, sender, review_date)
         return f"已创建第 {period_id} 期「{match.group(1)}」。请发布本期评分卡片。"
-    return "指令：开期 2026.08.19: 名称|品牌|图片URL｜本期榜单｜总榜｜往期列表｜查看往期 1｜往期测评图 1"
+    return "指令：开期 2026.08.19: 名称|品牌|图片URL｜设标题 标题｜设日期 日期｜选择往期｜本期榜单｜总榜"
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -299,6 +332,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.json_response({"current": ranking(conversation, period["id"] if period else None), "overall": ranking(conversation)})
         if parsed.path == "/api/periods":
             return self.json_response({"periods": [dict(period) for period in list_periods(conversation)]})
+        if parsed.path == "/api/history-menu":
+            return self.json_response(history_menu(conversation))
         if parsed.path == "/api/report.png":
             period_id = int(query["period_id"][0]) if query.get("period_id", [""])[0].isdigit() else None
             output = io.BytesIO(); report_image(conversation, period_id).save(output, format="PNG")

@@ -30,7 +30,11 @@ class CakeReviewTest(unittest.TestCase):
         listing = app.process_event({"data": {"client_id": "u1", "conversation_id": "group-a", "content": "\u5f80\u671f\u5217\u8868"}})
         self.assertIn(str(first), listing)
         detail = app.process_event({"data": {"client_id": "u1", "conversation_id": "group-a", "content": f"\u67e5\u770b\u5f80\u671f {first}"}})
-        self.assertIn("2026.08.19", detail)
+        self.assertIn("report.png", detail)
+    def test_history_menu_uses_editable_title_and_date(self):
+        app.create_period("group-a", "2026.08.19", ["抹茶"], "admin", "2026.08.19", "夏日杀糕")
+        menu = app.history_menu("group-a")
+        self.assertEqual(menu["options"][0]["text"], "夏日杀糕 · 2026.08.19")
     def test_report_is_a_png_with_fixed_five_tiers(self):
         period = app.create_period("group-a", "第 1 期", [{"name": "抹茶", "brand": "测试品牌", "image_url": ""}], "admin")
         with app.connect() as db: cake_id = db.execute("SELECT id FROM cakes WHERE period_id=?", (period,)).fetchone()["id"]

@@ -45,11 +45,12 @@ GET /api/card-spec?conversation_id=群ID
 往期测评图 3
 生成测评图
 设日期 2026.08.20
+设标题 夏日杀糕
 ```
 
 `GET /api/ranking?conversation_id=群ID` 会实时返回 `current`（本期）和 `overall`（总榜），可接到 SeaTalk H5 管理页。
 
-发送 `往期列表` 会列出每一期的编号、展示日期与状态；发送 `查看往期 编号` 可查看当期排名，发送 `往期测评图 编号` 可取得该期的分档图片。接口 `GET /api/periods?conversation_id=群ID` 返回全部期次；在 `/api/ranking` 和 `/api/report.png` 后附加 `period_id=编号` 即可读取指定往期。
+发送 `选择往期` 可发布 SeaTalk 选择卡片：每项都是“管理员标题 · 日期”，点击后直接生成该期分档图片。管理员可用 `设标题 夏日杀糕` 和 `设日期 2026.08.20` 修改当前期的标题及日期。卡片数据接口为 `GET /api/history-menu?conversation_id=群ID`；把 `options[]` 映射为 SeaTalk callback 按钮即可。`查看往期 编号` 仍可直接生成该期图片。
 
 `GET /api/report.png?conversation_id=群ID` 会直接生成可发群的 PNG 分档表。顶部固定显示“杀糕测评 · 本期蛋糕测评 · 日期”；左侧固定为夯、顶级、人上人、NPC、拉完了；右侧自动按平均分放置蛋糕图片、名称、品牌、分数和参与评分人数。平均分会四舍五入映射到五档，未评分蛋糕归入 NPC。管理员可用 `设日期 日期` 随时修改图片展示日期，不会影响评分。
 
